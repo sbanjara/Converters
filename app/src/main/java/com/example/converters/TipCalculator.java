@@ -18,18 +18,20 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.DecimalFormat;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class TipCalculator extends Fragment  implements View.OnClickListener {
 
     private TextView outputView;
+
     private EditText billPercent;
     private EditText totalAmount;
     private EditText numPeople;
-    private double percent;
+
     private int people;
+
     private double total;
+    private double percent;
+
     private String output;
 
     private static DecimalFormat df = new DecimalFormat("0.00");

@@ -14,11 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 
 public class DistanceConverter extends Fragment  implements  OnClickListener {
 
-    private String m;
-    private String k;
+    private String milesstring;
+    private String kilometerstring;
 
     private Double miles;
     private Double kilometers;
@@ -27,39 +29,50 @@ public class DistanceConverter extends Fragment  implements  OnClickListener {
     private EditText distanceinMiles;
     private EditText distanceinKilometers;
 
+    private static DecimalFormat df = new DecimalFormat("0.00");
+
 
     public DistanceConverter() {
 
         distanceinMiles = null;
         distanceinKilometers = null;
-        m = null;
-        k = null;
+        milesstring = null;
+        kilometerstring = null;
 
     }
 
 
     public void onClick(View v) {
 
-        m = distanceinMiles.getText().toString();
-        k = distanceinKilometers.getText().toString();
+        milesstring = distanceinMiles.getText().toString();
+        kilometerstring = distanceinKilometers.getText().toString();
 
-        if( m.isEmpty() ) {
+        if( milesstring.isEmpty() ) {
 
-            if( !k.isEmpty() ) {
+            if( !kilometerstring.isEmpty() ) {
 
-                kilometers = Double.parseDouble(k);
+                kilometers = Double.parseDouble(kilometerstring);
                 miles = (kilometers / miletokilometer);
-                distanceinMiles.setText(String.valueOf(miles));
+                distanceinMiles.setText(df.format(miles));
+            }
+        }
+
+        else if( kilometerstring.isEmpty() ) {
+
+            if( !milesstring.isEmpty() ) {
+
+                miles = Double.parseDouble(milesstring);
+                kilometers = (miles * miletokilometer);
+                distanceinKilometers.setText(df.format(kilometers));
+
             }
         }
         else {
-            if( !m.isEmpty() ) {
 
-                miles = Double.parseDouble(m);
-                kilometers = (miles * miletokilometer);
-                distanceinKilometers.setText(String.valueOf(kilometers));
+            miles = Double.parseDouble(milesstring);
+            kilometers = (miles * miletokilometer);
+            distanceinKilometers.setText(df.format(kilometers));
 
-            }
         }
 
     }

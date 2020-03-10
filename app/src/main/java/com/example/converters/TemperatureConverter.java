@@ -10,57 +10,67 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class TemperatureConverter extends Fragment  implements View.OnClickListener {
 
 
-    private String f;
-    private String c;
+    private String fahrenheitstring;
+    private String celsiusstring;
 
-    private Double farenheit;
-    private Double celcius;
+    private Double fahrenheit;
+    private Double celsius;
 
-    private EditText tempinfarenheit;
-    private EditText tempincelcius;
+    private EditText tempinfahrenheit;
+    private EditText tempincelsius;
+
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
 
     public TemperatureConverter() {
 
-        tempinfarenheit = null;
-        tempincelcius = null;
-        f = null;
-        c = null;
+        tempinfahrenheit = null;
+        tempincelsius = null;
+        fahrenheitstring = null;
+        celsiusstring = null;
 
     }
 
 
     public void onClick(View v) {
 
-        f = tempinfarenheit.getText().toString();
-        c = tempincelcius.getText().toString();
+        fahrenheitstring = tempinfahrenheit.getText().toString();
+        celsiusstring = tempincelsius.getText().toString();
 
-        if( f.isEmpty() ) {
+        if( fahrenheitstring.isEmpty() ) {
 
-            if( !c.isEmpty() ) {
+            if( !celsiusstring.isEmpty() ) {
 
-                celcius = Double.parseDouble(c);
-                farenheit = ( celcius * (9.0 / 5.0) ) + 32;
-                tempinfarenheit.setText(String.valueOf(farenheit));
+                celsius = Double.parseDouble(celsiusstring);
+                fahrenheit = ( celsius * (9.0 / 5.0) ) + 32;
+                tempinfahrenheit.setText(df.format(fahrenheit));
             }
         }
-        else {
-            if( !f.isEmpty() ) {
 
-                farenheit = Double.parseDouble(f);
-                celcius = ((farenheit - 32) * (5.0 / 9.0));
-                tempincelcius.setText(String.valueOf(celcius));
+        else if( celsiusstring.isEmpty() ) {
+
+            if( !fahrenheitstring.isEmpty() ) {
+
+                fahrenheit = Double.parseDouble(fahrenheitstring);
+                celsius = ((fahrenheit - 32) * (5.0 / 9.0));
+                tempincelsius.setText(df.format(celsius));
 
             }
+        }
+
+        else {
+
+            fahrenheit = Double.parseDouble(fahrenheitstring);
+            celsius = ((fahrenheit - 32) * (5.0 / 9.0));
+            tempincelsius.setText(df.format(celsius));
+
         }
 
     }
@@ -71,8 +81,8 @@ public class TemperatureConverter extends Fragment  implements View.OnClickListe
 
         View view =  inflater.inflate(R.layout.fragment_temperature_converter, container, false);
 
-        tempinfarenheit = (EditText) view.findViewById(R.id.farenheit);
-        tempincelcius = (EditText) view.findViewById(R.id.celcius);
+        tempinfahrenheit = (EditText) view.findViewById(R.id.fahrenheit);
+        tempincelsius = (EditText) view.findViewById(R.id.celsius);
 
         Button b = (Button)view.findViewById(R.id.calculate);
         b.setOnClickListener( this );
