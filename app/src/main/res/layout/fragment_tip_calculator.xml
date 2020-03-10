@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.93296856" />
+        app:layout_constraintGuide_percent="0.6" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/totalBillBox"
@@ -50,7 +50,7 @@
             android:id="@+id/totalAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -72,7 +72,7 @@
             android:id="@+id/tipPercent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:selectAllOnFocus="true"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -114,7 +114,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Test"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
         app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
         app:layout_constraintTop_toBottomOf="@+id/numPeopleBox" />
